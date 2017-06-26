@@ -5,14 +5,44 @@ window.onload = function() {
 var machineChoices = ['covfefe', 'spraytan', 'mailorderbrides', 'hairclub', 'ilovemoscow'];
 var machineGuess = machineChoices[Math.floor(Math.random() * machineChoices.length)];
 var letterInMachineGuess = [machineGuess[0], machineGuess[1], machineGuess[2], machineGuess[3], machineGuess[4], machineGuess[5], machineGuess[6], machineGuess[7], machineGuess[8], machineGuess[9], machineGuess[10], machineGuess[11], machineGuess[12], machineGuess[13], machineGuess[14]];
+var availableLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var wrongAnswer = -1;
-
+var messages = {win: 'You got it!', lose: 'The FBI is coming for you!', guessed: 'You already guessed '};
+var lettersGuessed, lettersMatched;
+lettersGuessed = lettersMatched = '';
 
 window.onkeyup = function() {
   document.getElementById('instructions').style.display = 'none';
   document.getElementById('login').style.display = 'block';
-  var humanGuess = event.key;
   console.log(machineGuess);
+  var output = document.getElementById("output");
+  output.innerHTML = '';
+  var humanGuess = event.key;
+
+  humanGuess.onkeyup = function () {
+        this.value = '';
+    };
+
+  //Copied from: https://jsfiddle.net/phollott/x29ym2ag/
+
+  /* does guess have a value? if yes continue, if no, error */
+        if (humanGuess) {
+            /* is guess a valid letter? if so carry on, else error */
+            if (availableLetters.indexOf(humanGuess) > -1) {
+  
+  //Copied from: https://jsfiddle.net/phollott/x29ym2ag/
+  //Checks whether humanGuess has been missed or matched already.
+  if ((lettersMatched && lettersMatched.indexOf(humanGuess) > -1) || (lettersGuessed && lettersGuessed.indexOf(humanGuess) > -1)) {
+                    output.innerHTML = messages.guessed + '"' + humanGuess.toUpperCase() + '"';
+  } else if (machineGuess.indexOf(guess) > -1) {
+                    var lettersToShow;
+                    lettersToShow = document.querySelectorAll(".letter" + guess.toUpperCase());
+
+                    for (var i = 0; i < lettersToShow.length; i++) {
+                        lettersToShow[i].classList.add("correct");
+                    }
+
+  
   if (humanGuess == machineGuess[0] || humanGuess == machineGuess[1] || humanGuess == machineGuess[2] || humanGuess == machineGuess[3] || humanGuess == machineGuess[4] || humanGuess == machineGuess[5] || humanGuess == machineGuess[6] || humanGuess == machineGuess[7] || humanGuess == machineGuess[8] || humanGuess == machineGuess[9] || humanGuess == machineGuess[10] || humanGuess == machineGuess[11] || humanGuess == machineGuess[12] || humanGuess == machineGuess[13] || humanGuess == machineGuess[14]) {
   	var appearInInput = document.getElementById('input');
   	document.onkeyup = function(event) {
@@ -22,7 +52,7 @@ window.onkeyup = function() {
   		wrongAnswer = wrongAnswer + 1;
   		var html = wrongAnswer;
   		document.querySelector("#wrong-guesses").innerHTML = html;
-  	}
+  	}}}
 }  
   
   /* THIS SUCCESSFULLY SHOWED WHATEVER LETTER A USER GUESSED INTO THE INPUT AREA.

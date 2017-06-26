@@ -37,9 +37,14 @@ p, li {
 	border: solid 1px #00aced;
 	text-align: left;
 	margin-left: 0;
+	padding: 1px;
 }
 
 #warning {
+	color: #00aced;
+}
+
+#output {
 	color: red;
 }
 

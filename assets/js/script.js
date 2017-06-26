@@ -10,6 +10,7 @@ var wrongAnswer = -1;
 var messages = {win: 'You got it!', lose: 'The FBI is coming for you!', guessed: 'You already guessed '};
 var lettersGuessed, lettersMatched;
 lettersGuessed = lettersMatched = '';
+var numLettersMatched = 0;
 
 window.onkeyup = function() {
   document.getElementById('instructions').style.display = 'none';
@@ -32,7 +33,7 @@ window.onkeyup = function() {
 /*Checks whether humanGuess has been missed or matched already.*/
   			if ((lettersMatched && lettersMatched.indexOf(humanGuess) > -1) || (lettersGuessed && lettersGuessed.indexOf(humanGuess) > -1)) {
             	output.innerHTML = messages.guessed + '"' + humanGuess.toUpperCase() + '"';
-			} else if (machineGuess.indexOf(guess) > -1) {
+			} else if (machineGuess.indexOf(humanGuess) > -1) {
     			var lettersToShow = document.querySelectorAll(".letter" + humanGuess.toUpperCase());
                 for (var i = 0; i < lettersToShow.length; i++) {
                         lettersToShow[i].classList.add("correct");

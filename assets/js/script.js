@@ -19,33 +19,65 @@ window.onkeyup = function() {
   output.innerHTML = '';
   var humanGuess = event.key;
 
-  /*humanGuess.onkeyup = function () {
-        this.value = '';
+/* Piece of code commented out because I think it was not working.
+	humanGuess.onkeyup = function () {
+    	this.value = '';
     };*/
 
-
-
-  //Copied from: https://jsfiddle.net/phollott/x29ym2ag/
-  /* does guess have a value? if yes continue, if no, error */
-        if (humanGuess) {
-            /* is guess a valid letter? if so carry on, else error */
-            if (availableLetters.indexOf(humanGuess) > -1) {  
-  //Copied from: https://jsfiddle.net/phollott/x29ym2ag/
-  //Checks whether humanGuess has been missed or matched already.
-  				if ((lettersMatched && lettersMatched.indexOf(humanGuess) > -1) || (lettersGuessed && lettersGuessed.indexOf(humanGuess) > -1)) {
-                    output.innerHTML = messages.guessed + '"' + humanGuess.toUpperCase() + '"';
-				} else if (machineGuess.indexOf(guess) > -1) {
-    				var lettersToShow = document.querySelectorAll(".letter" + humanGuess.toUpperCase());
-                    for (var i = 0; i < lettersToShow.length; i++) {
+/*Copied from: https://jsfiddle.net/phollott/x29ym2ag/
+  Checks whether humanGuess has a value. If true, continue. If false, return an error. */
+	if (humanGuess) {
+/* Checks whether humanGuess is a valid letter. If true, carry on. If not, return an error.*/
+        if (availableLetters.indexOf(humanGuess) > -1) {  
+/*Checks whether humanGuess has been missed or matched already.*/
+  			if ((lettersMatched && lettersMatched.indexOf(humanGuess) > -1) || (lettersGuessed && lettersGuessed.indexOf(humanGuess) > -1)) {
+            	output.innerHTML = messages.guessed + '"' + humanGuess.toUpperCase() + '"';
+			} else if (machineGuess.indexOf(guess) > -1) {
+    			var lettersToShow = document.querySelectorAll(".letter" + humanGuess.toUpperCase());
+                for (var i = 0; i < lettersToShow.length; i++) {
                         lettersToShow[i].classList.add("correct");
-                    }
+                }
 /* check to see if letter appears multiple times */
-                    for (var j = 0; j < machineGuess.length; j++) {
-                        if (machineGuess.charAt(j) === humanGuess) {
+                for (var j = 0; j < machineGuess.length; j++) {
+                    if (machineGuess.charAt(j) === humanGuess) {
                             numLettersMatched += 1;
-                        }
                     }
+                }
+				lettersMatched += guess;
+                if (numLettersMatched === currentWord.length) {
+                    gameOver(true);
+                }
+            } else {
+/* guess doesn't exist in current word and hasn't been guessed before, add to lettersGuessed, reduce lives & update user */
+                lettersGuessed += guess;
+                wrongAnswer--;
+                wrongAnswer.innerHTML = 'You have ' + lives + ' lives remaining';
+                if (lives === 0) gameOver();
+            }
+        } else {
+/* not a valid letter, error */
+            output.classList.add('error');
+            output.innerHTML = messages.validLetter;
+        }
+    } else {
+/* no letter entered, error */
+        output.classList.add('error');
+        output.innerHTML = messages.validLetter;
+    }
+    return false;
+};
+
+
   
+
+
+
+
+
+
+
+
+/* My code commented out to test borrowed code.
   if (humanGuess == machineGuess[0] || humanGuess == machineGuess[1] || humanGuess == machineGuess[2] || humanGuess == machineGuess[3] || humanGuess == machineGuess[4] || humanGuess == machineGuess[5] || humanGuess == machineGuess[6] || humanGuess == machineGuess[7] || humanGuess == machineGuess[8] || humanGuess == machineGuess[9] || humanGuess == machineGuess[10] || humanGuess == machineGuess[11] || humanGuess == machineGuess[12] || humanGuess == machineGuess[13] || humanGuess == machineGuess[14]) {
   	var appearInInput = document.getElementById('input');
   	document.onkeyup = function(event) {
@@ -57,7 +89,7 @@ window.onkeyup = function() {
   		document.querySelector("#wrong-guesses").innerHTML = html;
   	}
 } 
-  
+ */
 
 	
 

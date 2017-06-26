@@ -19,29 +19,32 @@ window.onkeyup = function() {
   output.innerHTML = '';
   var humanGuess = event.key;
 
-  humanGuess.onkeyup = function () {
+  /*humanGuess.onkeyup = function () {
         this.value = '';
-    };
+    };*/
+
+
 
   //Copied from: https://jsfiddle.net/phollott/x29ym2ag/
-
   /* does guess have a value? if yes continue, if no, error */
         if (humanGuess) {
             /* is guess a valid letter? if so carry on, else error */
-            if (availableLetters.indexOf(humanGuess) > -1) {
-  
+            if (availableLetters.indexOf(humanGuess) > -1) {  
   //Copied from: https://jsfiddle.net/phollott/x29ym2ag/
   //Checks whether humanGuess has been missed or matched already.
-  if ((lettersMatched && lettersMatched.indexOf(humanGuess) > -1) || (lettersGuessed && lettersGuessed.indexOf(humanGuess) > -1)) {
+  				if ((lettersMatched && lettersMatched.indexOf(humanGuess) > -1) || (lettersGuessed && lettersGuessed.indexOf(humanGuess) > -1)) {
                     output.innerHTML = messages.guessed + '"' + humanGuess.toUpperCase() + '"';
-  } else if (machineGuess.indexOf(guess) > -1) {
-                    var lettersToShow;
-                    lettersToShow = document.querySelectorAll(".letter" + guess.toUpperCase());
-
+				} else if (machineGuess.indexOf(guess) > -1) {
+    				var lettersToShow = document.querySelectorAll(".letter" + humanGuess.toUpperCase());
                     for (var i = 0; i < lettersToShow.length; i++) {
                         lettersToShow[i].classList.add("correct");
                     }
-
+/* check to see if letter appears multiple times */
+                    for (var j = 0; j < machineGuess.length; j++) {
+                        if (machineGuess.charAt(j) === humanGuess) {
+                            numLettersMatched += 1;
+                        }
+                    }
   
   if (humanGuess == machineGuess[0] || humanGuess == machineGuess[1] || humanGuess == machineGuess[2] || humanGuess == machineGuess[3] || humanGuess == machineGuess[4] || humanGuess == machineGuess[5] || humanGuess == machineGuess[6] || humanGuess == machineGuess[7] || humanGuess == machineGuess[8] || humanGuess == machineGuess[9] || humanGuess == machineGuess[10] || humanGuess == machineGuess[11] || humanGuess == machineGuess[12] || humanGuess == machineGuess[13] || humanGuess == machineGuess[14]) {
   	var appearInInput = document.getElementById('input');
@@ -52,19 +55,9 @@ window.onkeyup = function() {
   		wrongAnswer = wrongAnswer + 1;
   		var html = wrongAnswer;
   		document.querySelector("#wrong-guesses").innerHTML = html;
-  	}}}
-}  
+  	}
+} 
   
-  /* THIS SUCCESSFULLY SHOWED WHATEVER LETTER A USER GUESSED INTO THE INPUT AREA.
-  var input = document.getElementById('input');
-  document.onkeyup = function() {
-  	input.textContent = event.key;
-  }*/
-
-//FOR LOOP COPY IN CASE I NEED IT
-//for (var i = 0; i < 6; i++) {
-	//document.onkeyup = event.key;}
-	
 
 	
 

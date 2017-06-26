@@ -25,6 +25,16 @@ window.onkeyup = function() {
     	this.value = '';
     };*/
 
+/* set up display of letters in current word */
+        letters = document.getElementById("letters");
+        letters.innerHTML = '<li class="current-word">Current word:</li>';
+
+        var letter, i;
+        for (i = 0; i < currentWord.length; i++) {
+            letter = '<li class="letter letter' + currentWord.charAt(i).toUpperCase() + '">' + currentWord.charAt(i).toUpperCase() + '</li>';
+            letters.insertAdjacentHTML('beforeend', letter);
+        }
+
 /*Copied from: https://jsfiddle.net/phollott/x29ym2ag/
   Checks whether humanGuess has a value. If true, continue. If false, return an error. */
 	if (humanGuess) {
@@ -44,16 +54,16 @@ window.onkeyup = function() {
                             numLettersMatched += 1;
                     }
                 }
-				lettersMatched += guess;
-                if (numLettersMatched === currentWord.length) {
+				lettersMatched += humanGuess;
+                if (numLettersMatched === machineGuess.length) {
                     gameOver(true);
                 }
             } else {
 /* guess doesn't exist in current word and hasn't been guessed before, add to lettersGuessed, reduce lives & update user */
-                lettersGuessed += guess;
+                lettersGuessed += humanGuess;
                 wrongAnswer--;
-                wrongAnswer.innerHTML = 'You have ' + lives + ' lives remaining';
-                if (lives === 0) gameOver();
+                wrongAnswer.innerHTML = 'You have ' + wrongAnswer + ' lives remaining';
+                if (wrongAnswer === 0) gameOver();
             }
         } else {
 /* not a valid letter, error */

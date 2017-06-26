@@ -13,34 +13,29 @@ lettersGuessed = lettersMatched = '';
 var numLettersMatched = 0;
 
 window.onkeyup = function() {
-  document.getElementById('instructions').style.display = 'none';
-  document.getElementById('login').style.display = 'block';
-  console.log(machineGuess);
-  var output = document.getElementById("output");
-  output.innerHTML = '';
-  var humanGuess = event.key;
-
-/* Piece of code commented out because I think it was not working.
-	humanGuess.onkeyup = function () {
-    	this.value = '';
-    };*/
+	document.getElementById('instructions').style.display = 'none';
+	document.getElementById('login').style.display = 'block';
+	console.log(machineGuess);
+	var output = document.getElementById("output");
+	output.innerHTML = '';
+	var humanGuess = event.key;
 
 /* set up display of letters in current word */
-        letters = document.getElementById("letters");
-        letters.innerHTML = '<li class="current-word">Current word:</li>';
+    letters = document.getElementById("letters");
+        availableLetters.innerHTML = '<li class="current-word">Current word:</li>';
 
         var letter, i;
-        for (i = 0; i < currentWord.length; i++) {
+        for (i = 0; i < machineGuess.length; i++) {
             letter = '<li class="letter letter' + currentWord.charAt(i).toUpperCase() + '">' + currentWord.charAt(i).toUpperCase() + '</li>';
-            letters.insertAdjacentHTML('beforeend', letter);
+            availableLetters.insertAdjacentHTML('beforeend', letter);
         }
 
-/*Copied from: https://jsfiddle.net/phollott/x29ym2ag/
-  Checks whether humanGuess has a value. If true, continue. If false, return an error. */
+//Copied from: https://jsfiddle.net/phollott/x29ym2ag/
+/* Checks whether humanGuess has a value. If true, continue. If false, return an error. */
 	if (humanGuess) {
 /* Checks whether humanGuess is a valid letter. If true, carry on. If not, return an error.*/
         if (availableLetters.indexOf(humanGuess) > -1) {  
-/*Checks whether humanGuess has been missed or matched already.*/
+/* Checks whether humanGuess has been missed or matched already.*/
   			if ((lettersMatched && lettersMatched.indexOf(humanGuess) > -1) || (lettersGuessed && lettersGuessed.indexOf(humanGuess) > -1)) {
             	output.innerHTML = messages.guessed + '"' + humanGuess.toUpperCase() + '"';
 			} else if (machineGuess.indexOf(humanGuess) > -1) {

@@ -2,33 +2,37 @@ window.onload = function() {
   document.getElementById('login').style.display = 'none';
 };
 
-var machineChoices = ['covfefe', 'spraytan', 'mailorderbrides', 'hairclub', 'ilovemoscow'];
-var machineGuess = machineChoices[Math.floor(Math.random() * machineChoices.length)];
-var letterInMachineGuess = [machineGuess[0], machineGuess[1], machineGuess[2], machineGuess[3], machineGuess[4], machineGuess[5], machineGuess[6], machineGuess[7], machineGuess[8], machineGuess[9], machineGuess[10], machineGuess[11], machineGuess[12], machineGuess[13], machineGuess[14]];
-var availableLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var wrongAnswer = -1;
-var messages = {win: 'You got it!', lose: 'The FBI is coming for you!', guessed: 'You already guessed '};
-var lettersGuessed, lettersMatched;
-lettersGuessed = lettersMatched = '';
-var numLettersMatched = 0;
-
 window.onkeyup = function() {
 	document.getElementById('instructions').style.display = 'none';
 	document.getElementById('login').style.display = 'block';
+
+function setup() {
+        /* start config options */
+    var machineChoices = ['covfefe', 'spraytan', 'mailorderbrides', 'hairclub', 'ilovemoscow'];
+	var machineGuess = machineChoices[Math.floor(Math.random() * machineChoices.length)];
+	var letterInMachineGuess = [machineGuess[0], machineGuess[1], machineGuess[2], machineGuess[3], machineGuess[4], machineGuess[5], machineGuess[6], machineGuess[7], machineGuess[8], machineGuess[9], machineGuess[10], machineGuess[11], machineGuess[12], machineGuess[13], machineGuess[14]];
+	var availableLetters = ["abcdefghijklmnopqrstuvwxyz"];
+	var wrongAnswer = -1;
+	var messages = {win: 'You got it!', lose: 'The FBI is coming for you!', guessed: 'You already guessed '};
+	var lettersGuessed, lettersMatched;
+	lettersGuessed = lettersMatched = '';
+	var numLettersMatched = 0;
 	console.log(machineGuess);
 	var output = document.getElementById("output");
 	output.innerHTML = '';
 	var humanGuess = event.key;
+};
+/* end config options */
 
 /* set up display of letters in current word */
-    letters = document.getElementById("letters");
-        availableLetters.innerHTML = '<li class="current-word">Current word:</li>';
+    availableLetters = document.getElementById("letters");
+    availableLetters.innerHTML = '<li class="current-word">Current word:</li>';
 
-        var letter, i;
-        for (i = 0; i < machineGuess.length; i++) {
-            letter = '<li class="letter letter' + currentWord.charAt(i).toUpperCase() + '">' + currentWord.charAt(i).toUpperCase() + '</li>';
-            availableLetters.insertAdjacentHTML('beforeend', letter);
-        }
+    var letter, i;
+    for (i = 0; i < machineGuess.length; i++) {
+        letter = '<li class="letter letter' + machineGuess.charAt(i).toUpperCase() + '">' + machineGuess.charAt(i).toUpperCase() + '</li>';
+        availableLetters.insertAdjacentHTML('beforeend', letter);
+    }
 
 //Copied from: https://jsfiddle.net/phollott/x29ym2ag/
 /* Checks whether humanGuess has a value. If true, continue. If false, return an error. */
@@ -71,7 +75,7 @@ window.onkeyup = function() {
         output.innerHTML = messages.validLetter;
     }
     return false;
-};
+}
 
 
   

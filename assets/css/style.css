@@ -34,8 +34,43 @@ p, li {
     color: white;
 }
 
+.output {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.correct {
+    background-color: #00aced;
+    transition: all 1s ease;
+    padding: .1em;
+}
+
+.error {
+    color: red;
+    opacity: 1;
+}
+.warning {
+    color: orange;
+    opacity: 1;
+}
+.win {
+    color: #00aced;
+    opacity: 1;
+}
+
+.hidden {
+	display: none;
+}
+
+.unhidden {
+	display: block;
+}
+
 #instructions {
 	background: white;
+	display: block;
+	z-index: 5;
+	display: none;
 }
 
 #login {
@@ -51,7 +86,7 @@ p, li {
 }
 
 #warning {
-	color: #00aced;
+	color: red;
 }
 
 #output {

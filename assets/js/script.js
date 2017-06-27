@@ -1,13 +1,3 @@
-//Hides the login block.
-window.onload = function() {
-  document.getElementById('login').style.display = 'none';
-};
-
-//Reveals the login block and hides the instructions block.
-window.onkeyup = function() {
-	document.getElementById('instructions').style.display = 'none';
-	document.getElementById('login').style.display = 'block';
-}	
 
 //Begins area where strict code is used.
 (function () {
@@ -19,14 +9,14 @@ window.onkeyup = function() {
     function setup() {
         /* start config options */
         availableLetters = "abcdefghijklmnopqrstuvwxyz";
-        lives = 5;
-        words = ["cat", "dog", "cow", "reindeer"];
+        lives = 6;
+        words = ["covfefe", "iloveputin", "mailorderbrides", "hairclub", "spraytan", "bigly", "kremlin"];
         messages = {
-            win: 'You win!',
-            lose: 'Game over!',
-            guessed: ' already guessed, please try again...',
-            validLetter: 'Please enter a letter from A-Z'
-        };
+            win: 'You got it!',
+            lose: 'The FBI is onto you. Run!',
+            guessed: ' already guessed, try a different letter.',
+            validLetter: 'Please enter a letter from A-Z.'
+        };        
         /* end config options */
 
         lettersGuessed = lettersMatched = '';
@@ -40,7 +30,7 @@ window.onkeyup = function() {
         man = document.getElementById("man");
         guessInput = document.getElementById("letter");
 
-        man.innerHTML = 'You have ' + lives + ' lives remaining';
+        man.innerHTML = 'You have ' + lives + ' attempts remaining.';
         output.innerHTML = '';
 
         document.getElementById("letter").value = '';
@@ -52,7 +42,7 @@ window.onkeyup = function() {
 
         /* set up display of letters in current word */
         letters = document.getElementById("letters");
-        letters.innerHTML = '<li class="current-word">Current word:</li>';
+        letters.innerHTML = '<li class="current-word">Decoder:</li>';
 
         var letter, i;
         for (i = 0; i < currentWord.length; i++) {
@@ -83,7 +73,7 @@ window.onkeyup = function() {
     /* reset letter to guess on click */
     guessInput.onclick = function () {
         this.value = '';
-    };
+    };    
 
     /* main guess function when user clicks #guess */
     document.getElementById('hangman').onsubmit = function (e) {
@@ -126,7 +116,7 @@ window.onkeyup = function() {
                 else {
                     lettersGuessed += guess;
                     lives--;
-                    man.innerHTML = 'You have ' + lives + ' lives remaining';
+                    man.innerHTML = 'You have ' + lives + ' attempts remaining.';
                     if (lives === 0) gameOver();
                 }
             }
